@@ -36,11 +36,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
-                afirmacao: afirmacao
+                afirmacao: "afirmacao"
             },
         {
             texto:"Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores."
-            afirmacao: afirmacao
+            afirmacao: "afirmacao"
         },
         ]
     },
@@ -49,11 +49,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Criar uma imagem utilizando uma plataforma de design como o Paint.",
-                afirmacao: afirmacao
+                afirmacao: "afirmacao"
             },
             {
                 texto: "Criar uma imagem utilizando um gerador de imagem de IA." 
-                afirmacao: afirmacao
+                afirmacao: "afirmacao"
             },           
         ]
             }    
@@ -63,11 +63,11 @@ const perguntas = [
         alternativas: [
             {
                 texto:"Escrever comandos para o chat é uma forma de contribuir com o trabalho, por isso não é um problema utilizar o texto inteiro.",
-                afirmacao: afirmacao
+                afirmacao: "afirmacao"
             },
             {
                 texto: "O chat pode ser uma tecnologia muito avançada, mas é preciso manter a atenção pois toda máquina erra, por isso revisar o trabalho e contribuir com as perspectivas pessoais é essencial." ,
-                afirmacao: afirmacao
+                afirmacao: "afirmacao"
             },
         ] 
     }
@@ -78,9 +78,13 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
-    if(atual )
+    if(atual >= perguntas.lenght){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
     mostraAlternativa();
 }
 
@@ -93,8 +97,15 @@ function mostraAlternativa() {
 }
 function respostaSelecionada(opcaoSelecionada){
     const afirmacoes = opcaoSelecionada.afirmacoes;
-    historiaFinal = afirmacoes;
-    atual++
+    historiaFinal += afirmacoes + " ";
+    atual++;
     mostraPergunta();
 }
+
+function mostraResultado() {
+    caixaPerguntas.textContent = "Em 2049...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+}
+
 mostraPergunta();
